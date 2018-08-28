@@ -1,0 +1,41 @@
+openapi: 3.0.0
+info:
+  description: >-
+    This spec is to test issue 910
+  version: 1.0.0
+  title: OpenAPI Echo
+  license:
+    name: Apache-2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+servers:
+  - url: http://echo.jsontest.com/
+paths:
+  '/test_string/test/test_date/{date}':
+    get:
+      summary: Print echo
+      description: echo
+      operationId: getEcho
+      parameters:
+        - name: date
+          in: path
+          description: date
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Echo'
+components:
+  schemas:
+    Echo:
+      type: object
+      properties:
+        test_string:
+          type: string
+        test_date:
+          type: string
+          format: date-time
