@@ -27,8 +27,6 @@ import org.junit.Ignore;
 @Ignore
 public class Issue909Test {
 
-  private final DefaultApi api = new DefaultApi();
-
 
   /**
    * Print echo
@@ -37,12 +35,21 @@ public class Issue909Test {
    *
    */
   @Test
-  public void getEchoTest() {
-
+  public void getEchoEqualsTest() {
+    DefaultApi api = new DefaultApi();
     Md5 response = api.getmd5("test_with_equals=").block();
 
     assertNotNull(response);
     assertEquals( "test_with_equals=", response.getOriginal());
   }
 
+  @Test
+  public void getEchoSpecialCharsTest() {
+    DefaultApi api = new DefaultApi();
+    String test = "|!$%&/()=?^";
+    Md5 response = api.getmd5(test).block();
+
+    assertNotNull(response);
+    assertEquals(test, response.getOriginal());
+  }
 }
