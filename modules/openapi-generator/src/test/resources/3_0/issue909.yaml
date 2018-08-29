@@ -1,0 +1,40 @@
+openapi: 3.0.0
+info:
+  description: >-
+    This spec is to test issue 910
+  version: 1.0.0
+  title: OpenAPI Echo
+  license:
+    name: Apache-2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+servers:
+  - url: http://md5.jsontest.com/
+paths:
+  '/':
+    get:
+      summary: Print md5
+      description: md5
+      operationId: getmd5
+      parameters:
+        - name: text
+          in: query
+          description: text
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Md5'
+components:
+  schemas:
+    Md5:
+      type: object
+      properties:
+        md5:
+          type: string
+        original:
+          type: string
